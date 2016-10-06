@@ -31,6 +31,8 @@ public class Client_Controller extends Application implements Initializable{
 
     /*
      * Zavedení potřebných komponent GUI
+     *
+     * prostě jsem byl takhle naučený, co už
      */
     @FXML
     private ImageView img_Avatar;
@@ -42,6 +44,8 @@ public class Client_Controller extends Application implements Initializable{
     private Button btn_Settings;
     @FXML
     private Button btn_About;
+    @FXML
+    private Button btn_chat;
     @FXML
     private Label label_Nick;
     @FXML
@@ -72,6 +76,7 @@ public class Client_Controller extends Application implements Initializable{
     private FadeTransition fadeTransition = new FadeTransition();
     private Dialogy dialogs = new Dialogy();
     private ServerCommunicationMechanics serverCommunicationMechanics = new ServerCommunicationMechanics();
+    private ChatClient_Controller chatClient_controller = new ChatClient_Controller();
 
     /*
      * zavedení globálních proměnných
@@ -136,24 +141,8 @@ public class Client_Controller extends Application implements Initializable{
 
     /**
      * Základní funkce herního klienta, spíše GUI
-     */
-    public void handleButtonAbout(ActionEvent event){
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(getClass().getResource("resources/about.txt").getFile()));            // zavedení BufferedReaderu a připsání souboru
-            String text = "";                                                                                   // zavedení pomocné proměnné text
-            for(String line; (line = bufferedReader.readLine()) != null; ){                                     // začátek cyklu na čtení souboru
-                text += line + "\n";
-            }
-            bufferedReader.close();// uazvření BufferedReaderu
-            txtArea_about.setDisable(false);
-            txtArea_about.setOpacity(100);
-            txtArea_about.setText(text);       // zavolání funkce Message ze třídy Dialogy a předání text, který se přečetl ze souboru
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
+     *
+     *
      * Tahle funkce by šla vyřešit mnohem, ale mnohem elegantněji, bohužel, mě nic tak pozdě večer nenapadlo
      * @param event
      */
@@ -191,6 +180,38 @@ public class Client_Controller extends Application implements Initializable{
             feed_View.setOpacity(100);
         }
 
+    }
+
+    /**
+     * Handler pro ukázání statistik hráče
+     * @param event
+     */
+    public void handleButtonAbout(ActionEvent event){
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(getClass().getResource("resources/about.txt").getFile()));            // zavedení BufferedReaderu a připsání souboru
+            String text = "";                                                                                   // zavedení pomocné proměnné text
+            for(String line; (line = bufferedReader.readLine()) != null; ){                                     // začátek cyklu na čtení souboru
+                text += line + "\n";
+            }
+            bufferedReader.close();// uazvření BufferedReaderu
+            txtArea_about.setDisable(false);
+            txtArea_about.setOpacity(100);
+            txtArea_about.setText(text);       // zavolání funkce Message ze třídy Dialogy a předání text, který se přečetl ze souboru
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Handler pro otevření chatovacího okna
+     * @param event
+     */
+    public void handleButtonChat(ActionEvent event){
+        try {
+            chatClient_controller.start(new Stage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

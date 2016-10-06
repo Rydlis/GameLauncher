@@ -127,8 +127,6 @@ public class Login_Controller implements Initializable{
          */
             videoBackground();
             musicBackground();
-            System.out.println("nick poslán do piče leda tak");
-            client_controller.setNick(nick);
         }
     }
 
@@ -170,12 +168,14 @@ public class Login_Controller implements Initializable{
     private void musicBackground(){
         Media song = new Media(getClass().getResource("resources/sounds/intro.mp3").toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(song);
-        if (playSound && !isPlayingSound){
+        if (playSound && isPlayingSound){
             System.out.println("Hudba hraje");
             mediaPlayer.play();
+            isPlayingSound = true;
         } else if (isPlayingSound){
             System.out.println("hudba nehraje, došlo k přehození View");
             mediaPlayer.stop();
+            isPlayingSound = false;
         } else System.out.println("Tlačítko není aktivováno a hudba nehraje, nebo se něco zase posralo, a co jako");
     }
 
