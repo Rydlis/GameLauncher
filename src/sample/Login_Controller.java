@@ -109,25 +109,27 @@ public class Login_Controller implements Initializable{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-        // konec testování, pokračuj ve čtení
-        isLogged = serverCommunicationMechanics.loginUser(nick, password, chk_Database.isSelected()); // funkce vrací true/falce o tom, zda li je vůbec uživatel v databázi
-        if (isLogged){
-            try {
-                client_controller.start(Main.stage);          // pokud je vše úspěšné a uživatel ani já nic nezesrali, přepně se okno do klienta
-                client_controller.setNick(nick);
-            } catch (Exception e) {
-                e.printStackTrace();                          // stát se může vše, a v Javě dvakrát pravděpodobněji
-            }
         } else {
-            dialogs.Error("Ooops!","Bad nick or password, try again");  // uživatel jak se zdá zadal špatný nick nebo heslo
-        }
+            // konec testování, pokračuj ve čtení
+            isLogged = serverCommunicationMechanics.loginUser(nick, password, chk_Database.isSelected()); // funkce vrací true/falce o tom, zda li je vůbec uživatel v databázi
+            if (isLogged){
+                try {
+                    client_controller.start(Main.stage);          // pokud je vše úspěšné a uživatel ani já nic nezesrali, přepně se okno do klienta
+                    client_controller.setNick(nick);
+                }  catch (Exception e) {
+                    e.printStackTrace();                          // stát se může vše, a v Javě dvakrát pravděpodobněji
+                }
+            } else {
+                dialogs.Error("Ooops!","Bad nick or password, try again");  // uživatel jak se zdá zadal špatný nick nebo heslo
+            }
         /*
          * fuck this shit
          */
-        musicBackground();
-        System.out.println("nick poslán do piče leda tak");
-        client_controller.setNick(nick);
+            videoBackground();
+            musicBackground();
+            System.out.println("nick poslán do piče leda tak");
+            client_controller.setNick(nick);
+        }
     }
 
     /**

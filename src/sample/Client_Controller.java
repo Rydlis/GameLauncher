@@ -117,7 +117,7 @@ public class Client_Controller extends Application implements Initializable{
 
     /*
      * funkce které se spouší až po vytvoření třídy, jako třeba nastavení a dosazení textur -> nechce se mi to dělat přes css
-     * CSS pořádně neumí ani porhlížeče, natož tak JavaFX
+     * CSS pořádně neumí ani prohlížeče, natož tak JavaFX
      * @param location
      * @param resources
      */
