@@ -81,7 +81,7 @@ public class Client_Controller extends Application implements Initializable{
     /*
      * zavedení globálních proměnných
      */
-    private String nick ="";
+    private String player_nick;
     private Boolean isStatisticsVisible = false;
     private Boolean WebDatabase = false;
     private Boolean isChacheFile = false;
@@ -132,11 +132,7 @@ public class Client_Controller extends Application implements Initializable{
         /*
          * Základní inicializace GUIčka, jako setování nicku, gettování statistik
          */
-        if (nick.equals("")){
-            label_Nick.setText(serverCommunicationMechanics.getNick());
-        } else {
-            label_Nick.setText(nick);
-        }
+        label_Nick.setText(Login_Controller.Player_Nick_Vole);
     }
 
     /**
@@ -155,8 +151,8 @@ public class Client_Controller extends Application implements Initializable{
             feed_View.setDisable(true);
 
             // nastavení všech Labelů, FML
-            System.out.println("zavolána funkce v controlleru a nick: " + nick);
-            ArrayList<Integer> results = serverCommunicationMechanics.getStatistics(nick, WebDatabase);
+            System.out.println("zavolána funkce v controlleru a nick: " + player_nick);
+            ArrayList<Integer> results = serverCommunicationMechanics.getStatistics(player_nick, WebDatabase);
             label_XP.setText(String.valueOf(results.get(0)));
             label_Level.setText(String.valueOf(results.get(1)));
             label_Kills.setText(String.valueOf(results.get(2)));
@@ -203,7 +199,10 @@ public class Client_Controller extends Application implements Initializable{
     }
 
     /**
-     * Handler pro otevření chatovacího okna
+     * Handler pro otevření chatovacího okna, pošle se pár stringů jako nick
+     * a zbytek si obstarává ChatClient_Controller sám
+     *
+     * TODO dodělat posílání nicku
      * @param event
      */
     public void handleButtonChat(ActionEvent event){
@@ -240,6 +239,7 @@ public class Client_Controller extends Application implements Initializable{
     }
 
     void setNick(String nick) {
-        System.out.println(nick);
+        player_nick = nick;
+        System.out.println(nick + " Ve třídě client_controller");
     }
 }

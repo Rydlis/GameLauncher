@@ -22,6 +22,9 @@ import javax.swing.JTextField;
 
 /**
  * Created by david on 6.10.16.
+ *
+ * TODO dodělat posílání IP, nicku, otevírání okna pro konverzaci, zjisšťování jestli
+ * TODO je hráč online či ne, je toho dost kámo
  */
 public class ChatClient_Controller extends Application {
     BufferedReader in;
@@ -34,7 +37,7 @@ public class ChatClient_Controller extends Application {
     public void start(Stage primaryStage) throws Exception {
         System.out.println("načítání layoutu okna");
         Parent root = FXMLLoader.load(getClass().getResource("views/ChatWindow_Main.fxml"));
-        primaryStage.setTitle("Game Launcher");
+        primaryStage.setTitle("Game Launcher Chat");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();

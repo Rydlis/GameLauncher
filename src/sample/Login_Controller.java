@@ -64,11 +64,13 @@ public class Login_Controller implements Initializable{
      * Zavedení globálních proměnných
      */
     private Boolean isLogged;
-    private Boolean isPlaying = true;
+    private Boolean isPlayingLoadingAnimation = true;
     private Boolean isPlayingSound = false;
     private Boolean isPlayingVideo = false;
     private Boolean playVideo;
     private Boolean playSound;
+    //jenom na testování
+    protected static String Player_Nick_Vole;
 
     /**
      * Funkce při zavedení třídy
@@ -105,6 +107,8 @@ public class Login_Controller implements Initializable{
         // využití pro testovací účely
         if (nick.equals("Rydlis")){
             try {
+                musicBackground();
+                client_controller.setNick(txtField_nick.getText());
                 client_controller.start(Main.stage);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -114,19 +118,15 @@ public class Login_Controller implements Initializable{
             isLogged = serverCommunicationMechanics.loginUser(nick, password, chk_Database.isSelected()); // funkce vrací true/falce o tom, zda li je vůbec uživatel v databázi
             if (isLogged){
                 try {
-                    client_controller.start(Main.stage);          // pokud je vše úspěšné a uživatel ani já nic nezesrali, přepně se okno do klienta
+                    musicBackground();
                     client_controller.setNick(nick);
+                    client_controller.start(Main.stage);          // pokud je vše úspěšné a uživatel ani já nic nezesrali, přepně se okno do klienta
                 }  catch (Exception e) {
                     e.printStackTrace();                          // stát se může vše, a v Javě dvakrát pravděpodobněji
                 }
             } else {
                 dialogs.Error("Ooops!","Bad nick or password, try again");  // uživatel jak se zdá zadal špatný nick nebo heslo
             }
-        /*
-         * fuck this shit
-         */
-            videoBackground();
-            musicBackground();
         }
     }
 
@@ -136,6 +136,7 @@ public class Login_Controller implements Initializable{
      */
     public void handleLoginButton(ActionEvent event){
         loadingAnimation();
+        setPlayer_Nick_Vole(txtField_nick.getText());
         loginProcces(txtField_nick.getText(), txtField_password.getText());
     }
 
@@ -193,7 +194,7 @@ public class Login_Controller implements Initializable{
      * TODO ty vole, kdyby to fungovalo tak lehce, jsem zase opět něco pojebkal
      */
     private void loadingAnimation(){
-        if (isPlaying) {
+        if (isPlayingLoadingAnimation) {
             /* nastavení viditelnosti */
             imgView_wheel1.setDisable(false);
             imgView_wheel1.setOpacity(100);
@@ -220,7 +221,7 @@ public class Login_Controller implements Initializable{
             parallelTransition.play();
 
             /* nastavení booleanu z false na true */
-            isPlaying = !isPlaying;
+            isPlayingLoadingAnimation = !isPlayingLoadingAnimation;
         } else {
             /* nastavení neviditelnosti koleček */
             imgView_wheel1.setDisable(true);
@@ -230,8 +231,15 @@ public class Login_Controller implements Initializable{
 
             /* zastaveni animace */
             parallelTransition.stop();
-            isPlaying = !isPlaying;
+            isPlayingLoadingAnimation = !isPlayingLoadingAnimation;
         }
     }
 
+    public String getPlayer_Nick_Vole() {
+        return Player_Nick_Vole;
+    }
+
+    public void setPlayer_Nick_Vole(String player_Nick_Vole) {
+        Player_Nick_Vole = player_Nick_Vole;
+    }
 }
