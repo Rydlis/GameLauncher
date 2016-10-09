@@ -11,6 +11,10 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    // podívej, splashscreen, ať to taky trochu vypadá
+    private SplashScreen splashScreen = new SplashScreen();
+
+    // to abych měl přítup odkudkoliv
     protected static Stage stage;
 
     @Override
@@ -20,8 +24,8 @@ public class Main extends Application {
          * uložení objektu Stage do "static" proměné, aby bylo možné k ní přistupovat odkukoliv
          */
         Main.stage = primaryStage;
+        splashScreen.start(new Stage());
         System.out.println("načítání layoutu okna");
-        System.out.println(getClass().getResource("views/Login_Screen.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("views/Login_Screen.fxml"));
         primaryStage.setTitle("Game Launcher");
         Scene scene = new Scene(root);
@@ -43,7 +47,12 @@ public class Main extends Application {
         /**
          * už otevři oči, je to za tebou
          */
+        // zobrazení login screenu
         primaryStage.show();
+
+        // a schování SplashScreenu
+        splashScreen.close();
+
 
         /**
          * handler pro zachytávání žádosti o uzavření aplikace přes křížek
