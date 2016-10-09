@@ -8,10 +8,7 @@ import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 
 import javax.swing.JFrame;
@@ -40,7 +37,7 @@ public class ChatClient_Controller extends Application {
         primaryStage.setTitle("Game Launcher Chat");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.show();
+        //primaryStage.show();
         run();
     }
 
@@ -79,22 +76,14 @@ public class ChatClient_Controller extends Application {
      * Prompt for and return the address of the server.
      */
     private String getServerAddress() {
-        return JOptionPane.showInputDialog(
-                frame,
-                "Enter IP Address of the Server:",
-                "Welcome to the Chatter",
-                JOptionPane.QUESTION_MESSAGE);
+        return "127.0.01";
     }
 
     /**
      * Prompt for and return the desired screen name.
      */
     private String getName() {
-        return JOptionPane.showInputDialog(
-                frame,
-                "Choose a screen name:",
-                "Screen name selection",
-                JOptionPane.PLAIN_MESSAGE);
+        return Login_Controller.Player_Nick_Vole;
     }
 
     /**
@@ -103,7 +92,7 @@ public class ChatClient_Controller extends Application {
     private void run() throws IOException {
 
         // Make connection and initialize streams
-        String serverAddress = getServerAddress();
+        String serverAddress = "127.0.0.1";
         Socket socket = new Socket(serverAddress, 9001);
         in = new BufferedReader(new InputStreamReader(
                 socket.getInputStream()));

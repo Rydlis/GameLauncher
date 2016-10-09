@@ -95,7 +95,7 @@
             </Menu>
             <CheckMenuItem fx:id="chkButton_PlayVideo" mnemonicParsing="false" selected="true" text="Motion Background" />
             <CheckMenuItem fx:id="chkButton_PlaySound" mnemonicParsing="false" selected="true" text="Play Music" />
-            <CheckMenuItem fx:id="chk_Database" mnemonicParsing="false" selected="true" text="Web Database - DEV ONLY" />
+            <CheckMenuItem fx:id="chk_Database" mnemonicParsing="false" text="Web Database - DEV ONLY" />
         </items>
       </MenuButton>
       <ImageView fx:id="imgView_wheel1" fitHeight="110.0" fitWidth="110.0" layoutX="533.0" layoutY="583.0" pickOnBounds="true" preserveRatio="true" />

@@ -162,7 +162,6 @@ public class Client_Controller extends Application implements Initializable{
             //label_LastPlayed.setText(String.valueOf(results.get(5)));
 
             // zapnutí Statistik
-            gridPane_Statistics.setDisable(false);
             fadeIn(gridPane_Statistics);
 
         } if (isStatisticsVisible){
@@ -222,6 +221,7 @@ public class Client_Controller extends Application implements Initializable{
         fadeTransition.setDuration(new Duration(500));
         fadeTransition.setFromValue(0);
         fadeTransition.setToValue(100);
+        node.setDisable(false);
         fadeTransition.play();
     }
 
