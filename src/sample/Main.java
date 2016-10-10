@@ -23,14 +23,20 @@ public class Main extends Application {
         /**
          * uložení objektu Stage do "static" proměné, aby bylo možné k ní přistupovat odkukoliv
          */
-        Main.stage = primaryStage;
         splashScreen.start(new Stage());
+        Main.stage = primaryStage;
         System.out.println("načítání layoutu okna");
+        //just progress bar
+        splashScreen.setProgressBar(0.2);
         Parent root = FXMLLoader.load(getClass().getResource("views/Login_Screen.fxml"));
         primaryStage.setTitle("Game Launcher");
         Scene scene = new Scene(root);
+        //just progress bar
+        splashScreen.setProgressBar(0.4);
         primaryStage.setScene(scene);
         primaryStage.centerOnScreen();
+        //just progress bar
+        splashScreen.setProgressBar(0.8);
 
         /**
          * hele, na tohle nejsem hrdý, a co nejdříve se té zrůdnosti zbavím, fakt se omlouvám komukoliv kdo to dostane do ruky
@@ -43,6 +49,9 @@ public class Main extends Application {
         primaryStage.setMinWidth(1280);
         primaryStage.setMaxHeight(720);
         primaryStage.setMaxWidth(1280);
+
+        //nastavení finále progress baru
+        splashScreen.setProgressBar(1.0);
 
         /**
          * už otevři oči, je to za tebou

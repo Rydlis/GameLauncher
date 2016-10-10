@@ -37,8 +37,8 @@ public class ChatClient_Controller extends Application {
         primaryStage.setTitle("Game Launcher Chat");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        //primaryStage.show();
-        run();
+        primaryStage.show();
+        //run();
     }
 
     /**

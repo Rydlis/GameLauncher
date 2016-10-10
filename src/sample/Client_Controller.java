@@ -1,5 +1,7 @@
 package sample;
 
+//TODO dodělat přepínání náhledů přes viewChanger
+
 /* WOW O.O */
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
@@ -19,12 +21,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class Client_Controller extends Application implements Initializable{
@@ -50,6 +51,8 @@ public class Client_Controller extends Application implements Initializable{
     private Label label_Nick;
     @FXML
     private GridPane gridPane_Statistics;
+    @FXML
+    private GridPane gridPane_Settings;
     @FXML
     private ListView feed_View;
     @FXML
@@ -133,6 +136,13 @@ public class Client_Controller extends Application implements Initializable{
          * Základní inicializace GUIčka, jako setování nicku, gettování statistik
          */
         label_Nick.setText(Login_Controller.Player_Nick_Vole);
+
+        /*
+         * Sekce s namrdanýma snad všema listenerama a event handlerama které jsem piča kdy zjistil
+         */
+        img_Avatar.setOnMouseClicked(event -> {
+            dialogs.Info("Ooops!", "Function is not implemented yet!");
+        });
     }
 
     /**
@@ -175,6 +185,11 @@ public class Client_Controller extends Application implements Initializable{
             feed_View.setOpacity(100);
         }
 
+    }
+
+    public void handleShowSettings(ActionEvent event){
+        gridPane_Settings.setDisable(false);
+        gridPane_Settings.setOpacity(100);
     }
 
     /**
@@ -225,6 +240,10 @@ public class Client_Controller extends Application implements Initializable{
         fadeTransition.play();
     }
 
+    private void viewChanger(List<Node> toHide, Node toShow){
+
+    }
+
     /**
      * Gettery a Settery
      * @return
@@ -236,10 +255,5 @@ public class Client_Controller extends Application implements Initializable{
 
     public void setWebDatabase(Boolean webDatabase) {
         WebDatabase = webDatabase;
-    }
-
-    void setNick(String nick) {
-        player_nick = nick;
-        System.out.println(nick + " Ve třídě client_controller");
     }
 }

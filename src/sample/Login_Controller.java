@@ -108,7 +108,6 @@ public class Login_Controller implements Initializable{
         if (nick.equals("Rydlis")){
             try {
                 musicBackground();
-                client_controller.setNick(txtField_nick.getText());
                 client_controller.start(Main.stage);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -119,7 +118,6 @@ public class Login_Controller implements Initializable{
             if (isLogged){
                 try {
                     musicBackground();
-                    client_controller.setNick(nick);
                     client_controller.start(Main.stage);          // pokud je vše úspěšné a uživatel ani já nic nezesrali, přepně se okno do klienta
                 }  catch (Exception e) {
                     e.printStackTrace();                          // stát se může vše, a v Javě dvakrát pravděpodobněji

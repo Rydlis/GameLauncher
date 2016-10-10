@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SplashScreen">
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SplashScreen">
    <children>
-      <ImageView fx:id="splash" fitHeight="400.0" fitWidth="600.0" layoutX="145.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Label layoutX="69.0" layoutY="118.0" style="-fx-font-style: italic;" text="Blank Splashscreen" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="70.0">
-         <font>
-            <Font size="48.0" />
-         </font>
-      </Label>
-      <Label layoutX="52.0" layoutY="193.0" text="Because fuck you..." AnchorPane.leftAnchor="70.0">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <Label layoutX="466.0" layoutY="281.0" text="... that's why." AnchorPane.rightAnchor="70.0">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
+      <ImageView fx:id="splashImageView" fitHeight="400.0" fitWidth="600.0" layoutX="145.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../resources/textures/splash_screen_image.png" />
+         </image></ImageView>
+      <ProgressBar fx:id="progressBar" layoutY="366.0" prefHeight="20.0" prefWidth="600.0" progress="0.0" />
    </children>
 </AnchorPane>
