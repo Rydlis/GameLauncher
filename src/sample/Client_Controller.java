@@ -6,6 +6,7 @@ package sample;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +26,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -80,6 +82,7 @@ public class Client_Controller extends Application implements Initializable{
     private Dialogy dialogs = new Dialogy();
     private ServerCommunicationMechanics serverCommunicationMechanics = new ServerCommunicationMechanics();
     private ChatClient_Controller chatClient_controller = new ChatClient_Controller();
+    private ArrayList<Node> listOfNodes = new ArrayList<>();
 
     /*
      * zavedení globálních proměnných
@@ -88,6 +91,9 @@ public class Client_Controller extends Application implements Initializable{
     private Boolean isStatisticsVisible = false;
     private Boolean WebDatabase = false;
     private Boolean isChacheFile = false;
+
+    public Client_Controller() {
+    }
 
     /**
      * Funkce které běží při samotném vytváření dané třídy
@@ -143,6 +149,14 @@ public class Client_Controller extends Application implements Initializable{
         img_Avatar.setOnMouseClicked(event -> {
             dialogs.Info("Ooops!", "Function is not implemented yet!");
         });
+
+        Platform.runLater(()->{
+            // šlo to i lépe, ale co už
+            listOfNodes.add(gridPane_Settings);
+            listOfNodes.add(gridPane_Statistics);
+            listOfNodes.add(feed_View);
+            listOfNodes.add(txtArea_about);
+        });
     }
 
     /**
@@ -153,43 +167,23 @@ public class Client_Controller extends Application implements Initializable{
      * @param event
      */
     public void handleShowStatistics(ActionEvent event){
-        if (!isStatisticsVisible){
-            isStatisticsVisible = !isStatisticsVisible;
-            System.out.println(isStatisticsVisible);
-            // zneviditelnění feed View
-            feed_View.setOpacity(0);
-            feed_View.setDisable(true);
 
-            // nastavení všech Labelů, FML
-            System.out.println("zavolána funkce v controlleru a nick: " + player_nick);
-            ArrayList<Integer> results = serverCommunicationMechanics.getStatistics(player_nick, WebDatabase);
-            label_XP.setText(String.valueOf(results.get(0)));
-            label_Level.setText(String.valueOf(results.get(1)));
-            label_Kills.setText(String.valueOf(results.get(2)));
-            label_Deaths.setText(String.valueOf(results.get(3)));
-            label_Money.setText(String.valueOf(results.get(4)));
-            label_PlayedHours.setText(String.valueOf(results.get(5)));
-            //label_LastPlayed.setText(String.valueOf(results.get(5)));
+        viewChanger(gridPane_Statistics);
 
-            // zapnutí Statistik
-            fadeIn(gridPane_Statistics);
-
-        } if (isStatisticsVisible){
-            isStatisticsVisible = !isStatisticsVisible;
-            // zneviditelnění statistik
-            gridPane_Statistics.setDisable(true);
-            gridPane_Statistics.setOpacity(0);
-
-            // zviditelnění feed view
-            feed_View.setDisable(false);
-            feed_View.setOpacity(100);
-        }
-
+        // nastavení všech Labelů, FML
+        System.out.println("zavolána funkce v controlleru a nick: " + player_nick);
+        ArrayList<Integer> results = serverCommunicationMechanics.getStatistics(player_nick, WebDatabase);
+        label_XP.setText(String.valueOf(results.get(0)));
+        label_Level.setText(String.valueOf(results.get(1)));
+        label_Kills.setText(String.valueOf(results.get(2)));
+        label_Deaths.setText(String.valueOf(results.get(3)));
+        label_Money.setText(String.valueOf(results.get(4)));
+        label_PlayedHours.setText(String.valueOf(results.get(5)));
+        //label_LastPlayed.setText(String.valueOf(results.get(5)));
     }
 
     public void handleShowSettings(ActionEvent event){
-        gridPane_Settings.setDisable(false);
-        gridPane_Settings.setOpacity(100);
+        viewChanger(gridPane_Settings);
     }
 
     /**
@@ -197,6 +191,7 @@ public class Client_Controller extends Application implements Initializable{
      * @param event
      */
     public void handleButtonAbout(ActionEvent event){
+        viewChanger(txtArea_about);
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(getClass().getResource("resources/about.txt").getFile()));            // zavedení BufferedReaderu a připsání souboru
             String text = "";                                                                                   // zavedení pomocné proměnné text
@@ -204,8 +199,6 @@ public class Client_Controller extends Application implements Initializable{
                 text += line + "\n";
             }
             bufferedReader.close();// uazvření BufferedReaderu
-            txtArea_about.setDisable(false);
-            txtArea_about.setOpacity(100);
             txtArea_about.setText(text);       // zavolání funkce Message ze třídy Dialogy a předání text, který se přečetl ze souboru
         } catch (IOException e) {
             e.printStackTrace();
@@ -240,8 +233,16 @@ public class Client_Controller extends Application implements Initializable{
         fadeTransition.play();
     }
 
-    private void viewChanger(List<Node> toHide, Node toShow){
-
+    private void viewChanger(Node toShow){
+        Node helpfulNode;
+        for (int i = 0; i<= (listOfNodes.size() - 1); i++){
+            helpfulNode = listOfNodes.get(i);
+            helpfulNode.setOpacity(0);
+            helpfulNode.setDisable(true);
+            System.out.println("U prvku: " + helpfulNode.getId() + " nastavena neviditelnost");
+        }
+        toShow.setOpacity(100);
+        toShow.setDisable(false);
     }
 
     /**
